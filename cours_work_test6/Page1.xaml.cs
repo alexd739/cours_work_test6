@@ -289,10 +289,10 @@ namespace cours_work_test6
         private Dictionary<string, MinMax> CalculateMinMax(IEnumerable<object> list)
         {
             Dictionary<string, MinMax> outputDictionary = new Dictionary<string, MinMax>();
-            for (int i = 1; i < list.Count(); i++)
+            for (int i = 0; i < list.Count(); i++)
             {
                 var colList = GetColumnFromArray<object>(dataObjects
-                    , FindByColumnName(dataObjects,list.ElementAt(i).ToString()).Value, true);
+                    , FindByColumnName(dataObjects, list.ElementAt(i).ToString()).Value, true);
                 var doubleList = colList.ConvertAll(e => Convert.ToDouble(e, CultureInfo.InvariantCulture));
                 outputDictionary.Add(list.ElementAt(i).ToString(), new MinMax(doubleList.Min(), doubleList.Max()));
             }
@@ -417,7 +417,7 @@ namespace cours_work_test6
                 for (int i = 0; i < marker.Count(); i++)
                 {
                     var cName = columnRStringDictionary.ElementAt(i).Key;
-                    if (marker[i].Contains("TRUE") || i == regrColumnPostion-1)
+                    if (marker[i].Contains("TRUE") || i == regrColumnPostion-1||(staticVarList.Contains(cName)&&optimVarList.Contains(columnName)))
                         regressionDictionary.Add(cName, 0.0);
                     else
                     {
@@ -548,6 +548,8 @@ namespace cours_work_test6
             var choosenColumns = staticVarList.Union(controlVarList).Union(optimVarList);
             FillColumnDictionary(choosenColumns, out columnRStringDictionary);
             Connector.staticVars = staticVarList;
+            Connector.optimVarList = optimVarList;
+            Connector.controlVarList = controlVarList;
         }
         #endregion
 
