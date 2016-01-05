@@ -4,33 +4,40 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="642.051" d:DesignWidth="1280.582"
-	    Title="Page1">
+      d:DesignHeight="642.051"
+	    Title="Page1" Width="1383.582">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
         <!--<Button Content="Перейти к следующей стадии расчета!" HorizontalAlignment="Left" Height="28" Margin="874,546,0,0" VerticalAlignment="Top" Width="304" Click="Button_Click"/>-->
         <Grid>
             <Button x:Name="GetButton" Content="Получить данные" HorizontalAlignment="Left" Margin="19,523,0,0" VerticalAlignment="Top" Width="124" Click="GetButton_Click" RenderTransformOrigin="-0.433,15.835" Height="45"/>
             <DataGrid x:Name="OuterDataGrid" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Height="430" Width="769" />
-            <Button x:Name="button" Content="R Engine test" Click="RegressionButton_Click" HorizontalAlignment="Left" Margin="784,541,0,0" VerticalAlignment="Top" Width="114" Height="45" RenderTransformOrigin="0.886,0.511"/>
-            <ListBox x:Name="VariablesList" HorizontalAlignment="Left" Height="358" Margin="784,26,0,0" VerticalAlignment="Top" Width="226"/>
+            <Button x:Name="button" Content="Расчет" Click="RegressionButton_Click" HorizontalAlignment="Left" Margin="1252,350,0,0" VerticalAlignment="Top" Width="125" Height="50" RenderTransformOrigin="0.886,0.511"/>
+            <ListBox x:Name="VariablesList" HorizontalAlignment="Left" Height="597" Margin="784,26,0,0" VerticalAlignment="Top" Width="226"/>
             <Label x:Name="label" Content="Список переменных:" HorizontalAlignment="Left" Margin="784,0,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label1" Content="Данные:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="195"/>
-            <ListBox x:Name="ControlVariablesList" HorizontalAlignment="Left" Height="212" Margin="1015,26,0,0" VerticalAlignment="Top" Width="248"/>
+            <ListBox x:Name="ControlVariablesList" HorizontalAlignment="Left" Height="212" Margin="1015,26,0,0" VerticalAlignment="Top" Width="231"/>
             <Label x:Name="label_Copy" Content="Переменные управления:" HorizontalAlignment="Left" Margin="1015,0,0,0" VerticalAlignment="Top"/>
 
-            <ListBox x:Name="StaticVariablesList" HorizontalAlignment="Left" Height="194" Margin="1015,262,0,0" VerticalAlignment="Top" Width="248"/>
+            <ListBox x:Name="StaticVariablesList" HorizontalAlignment="Left" Height="148" Margin="1015,262,0,0" VerticalAlignment="Top" Width="231"/>
             <Label x:Name="label2" Content="Переменные состояния:" HorizontalAlignment="Left" Margin="1015,236,0,0" VerticalAlignment="Top"/>
-            <ListBox x:Name="OptimVariable" HorizontalAlignment="Left" Height="41" Margin="784,415,0,0" VerticalAlignment="Top" Width="226" RenderTransformOrigin="0.08,0.439"/>
-            <Label x:Name="label3" Content="Критериальная переменная:" HorizontalAlignment="Left" Margin="784,384,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="ChooseControlButton" Content="Выбор управления" HorizontalAlignment="Left" Margin="914,466,0,0" VerticalAlignment="Top" Width="109" RenderTransformOrigin="0.067,0.65" Height="49" Click="ChooseControlButton_Click"/>
-            <Button x:Name="ChooseStaticButton" Content="Выбор состояний" HorizontalAlignment="Left" Margin="1028,466,0,0" VerticalAlignment="Top" Width="116" Height="49" Click="ChooseStaticButton_Click"/>
-            <Button x:Name="ClearButton" Content="Очистка выбора" HorizontalAlignment="Left" Margin="1149,466,0,0" VerticalAlignment="Top" Width="114" Height="49"/>
-            <Button x:Name="ChooseOptimButton" Content="Выбор критериальной" HorizontalAlignment="Left" Margin="784,466,0,0" VerticalAlignment="Top" Width="125" Height="49" RenderTransformOrigin="1.392,0.51" Click="ChooseOptimButton_Click"/>
+            <ListBox x:Name="OptimVariable" HorizontalAlignment="Left" Height="41" Margin="1015,582,0,0" VerticalAlignment="Top" Width="226" RenderTransformOrigin="0.08,0.439"/>
+            <Label x:Name="label3" Content="Критериальная переменная:" HorizontalAlignment="Left" Margin="1015,556,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="ChooseControlButton" Content="Выбор управления" HorizontalAlignment="Left" Margin="1251,75,0,0" VerticalAlignment="Top" Width="125" RenderTransformOrigin="0.067,0.65" Height="50" Click="ChooseControlButton_Click"/>
+            <Button x:Name="ChooseStaticButton" Content="Выбор состояний" HorizontalAlignment="Left" Margin="1251,20,0,0" VerticalAlignment="Top" Width="125" Height="50" Click="ChooseStaticButton_Click"/>
+            <Button x:Name="ClearButton" Content="Очистка выбора" HorizontalAlignment="Left" Margin="1252,240,0,0" VerticalAlignment="Top" Width="125" Height="50" Click="ClearButton_Click"/>
+            <Button x:Name="ChooseOptimButton" Content="Выбор критериальной" HorizontalAlignment="Left" Margin="1252,185,0,0" VerticalAlignment="Top" Width="124" Height="50" RenderTransformOrigin="1.392,0.51" Click="ChooseOptimButton_Click"/>
             <TextBox x:Name="FilePath" HorizontalAlignment="Left" Height="23" Margin="19,492,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382"/>
             <Label x:Name="label4" Content="Путь к файлу с данными:" HorizontalAlignment="Left" Margin="19,466,0,0" VerticalAlignment="Top"/>
             <Button x:Name="FileSeekButton" Content="Обзор" HorizontalAlignment="Left" Margin="406,495,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="433,538,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="63" Width="309"/>
-            <Button x:Name="ChoiseButton" Content="Сделать Выбор" HorizontalAlignment="Left" Margin="914,541,0,0" VerticalAlignment="Top" Width="109" Height="45" Click="ChoiseButton_Click"/>
+            <Button x:Name="ChoiseButton" Content="Сделать Выбор" HorizontalAlignment="Left" Margin="1252,295,0,0" VerticalAlignment="Top" Width="125" Height="50" Click="ChoiseButton_Click"/>
+            <ListBox x:Name="parameterListBox" HorizontalAlignment="Left" Height="122" Margin="1015,434,0,0" VerticalAlignment="Top" Width="231"/>
+            <Label x:Name="label5" Content="Параметры" HorizontalAlignment="Left" Margin="1015,410,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="ParameterButton" Content="Выбор параметров" HorizontalAlignment="Left" Margin="1251,130,0,0" VerticalAlignment="Top" Width="125" Height="50" RenderTransformOrigin="-0.512,-3.84" Click="ParameterButton_Click"/>
         </Grid>
     </Grid>
 </Page>

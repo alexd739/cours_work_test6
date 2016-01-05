@@ -26,7 +26,12 @@ namespace cours_work_test6
     /// </summary>
     public static class Connector
     {
+        static Connector()
+        {
+            parameterRegressionDictionary= new Dictionary<string, Dictionary<string, double>>();
+        }
         public static Dictionary<string, Dictionary<string, double>> regressionDictionary { get; set; }
+        public static Dictionary<string, Dictionary<string, double>> parameterRegressionDictionary { get; set; }
         public static Dictionary<string, MinMax> MinMaxDictionary { get; set; }
         public static ObservableCollection<object> staticVars = new ObservableCollection<object>();
         public static ObservableCollection<object> controlVarList = new ObservableCollection<object>();

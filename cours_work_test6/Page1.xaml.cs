@@ -40,6 +40,7 @@ namespace cours_work_test6
         private ObservableCollection<object> controlVarList;
         private ObservableCollection<object> staticVarList;
         private ObservableCollection<object> optimVarList;
+        private ObservableCollection<object> parameterList; 
         private Dictionary<string, string> columnRStringDictionary;
 
         /// <summary>
@@ -52,10 +53,12 @@ namespace cours_work_test6
             controlVarList = new ObservableCollection<object>();
             staticVarList = new ObservableCollection<object>();
             optimVarList = new ObservableCollection<object>();
+            parameterList=new ObservableCollection<object>();
 
             StaticVariablesList.ItemsSource = staticVarList;
             OptimVariable.ItemsSource = optimVarList;
             ControlVariablesList.ItemsSource = controlVarList;
+            parameterListBox.ItemsSource = parameterList;
             VariablesList.SelectionMode = SelectionMode.Extended;
 
 
@@ -443,6 +446,27 @@ namespace cours_work_test6
             return null;
         }
 
+        private void CalculateParameterData(REngine engine)
+        {
+            var parameterRString = from item in columnRStringDictionary
+                                   where parameterList.Contains(item.Key)
+                                   select item;
+            var controlRString = new Dictionary<string, string>();
+            foreach (var col in columnRStringDictionary)
+            {
+                if(controlVarList.Contains(col.Key))
+                    controlRString.Add(col.Key,col.Value);
+            }
+            foreach (var item in parameterRString)
+            {
+                controlRString.Add(item.Key,item.Value);
+                var val = CalculateStatisticData(controlRString, item.Key,engine);
+                Connector.parameterRegressionDictionary.Add(item.Key,val);
+                controlRString.Remove(item.Key);
+            }
+            
+        }
+
         #endregion
 
 
@@ -466,9 +490,10 @@ namespace cours_work_test6
                 foreach (var item in VariablesList.SelectedItems)
                 {
                     if (!controlVarList.Contains(item) &&
-                        !optimVarList.Contains(item) &&
-                        !staticVarList.Contains(item) &&
-                        optimVarList.Count < 1)
+                    !optimVarList.Contains(item) &&
+                    !staticVarList.Contains(item) &&
+                    !parameterList.Contains(item)&&
+                    optimVarList.Count < 1)
                         optimVarList.Add(item);
                     else
                     {
@@ -484,7 +509,8 @@ namespace cours_work_test6
             {
                 if (!controlVarList.Contains(item) &&
                     !optimVarList.Contains(item) &&
-                    !staticVarList.Contains(item))
+                    !staticVarList.Contains(item) &&
+                    !parameterList.Contains(item))
                     controlVarList.Add(item);
                 else
                 {
@@ -498,8 +524,9 @@ namespace cours_work_test6
             foreach (var item in VariablesList.SelectedItems)
             {
                 if (!controlVarList.Contains(item) &&
-                    !optimVarList.Contains(item) &&
-                    !staticVarList.Contains(item))
+                     !optimVarList.Contains(item) &&
+                     !staticVarList.Contains(item) &&
+                     !parameterList.Contains(item))
                     staticVarList.Add(item);
                 else
                 {
@@ -537,6 +564,9 @@ namespace cours_work_test6
 
             columnRStringDictionary.Add(keyToRemove, valueToremove);
 
+            if(parameterList.Count>0)
+                CalculateParameterData(engine);
+
             Connector.regressionDictionary = regressionList;
             Connector.MinMaxDictionary = CalculateMinMax(staticVarList.Union(controlVarList).Union(optimVarList));
             engine.Dispose();
@@ -545,14 +575,37 @@ namespace cours_work_test6
         }
         private void ChoiseButton_Click(object sender, RoutedEventArgs e)
         {
-            var choosenColumns = staticVarList.Union(controlVarList).Union(optimVarList);
+            var choosenColumns = staticVarList.Union(controlVarList).Union(parameterList).Union(optimVarList);
             FillColumnDictionary(choosenColumns, out columnRStringDictionary);
+
             Connector.staticVars = staticVarList;
             Connector.optimVarList = optimVarList;
             Connector.controlVarList = controlVarList;
         }
+
+        private void ParameterButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in VariablesList.SelectedItems)
+            {
+                if (!controlVarList.Contains(item) &&
+                    !optimVarList.Contains(item) &&
+                    !staticVarList.Contains(item)&&
+                    !parameterList.Contains(item))
+                    parameterList.Add(item);
+                else
+                {
+                    MessageBox.Show("Выбранная переменная уже присутствует в другой группе!", "Ошибка!");
+                }
+            }
+        }
         #endregion
 
-
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            controlVarList.Clear();
+            staticVarList.Clear();
+            optimVarList.Clear();
+            parameterList.Clear();
+        }
     }
 }
