@@ -25,8 +25,7 @@ using RDotNet;
 using Excel = Microsoft.Office.Interop.Excel;
 using RDotNet.NativeLibrary;
 using intlinprogNative;
-using MathWorks.MATLAB.NET.Arrays;
-using MathWorks.MATLAB.NET.Utility;
+
 
 namespace cours_work_test6
 {
@@ -446,26 +445,6 @@ namespace cours_work_test6
             return null;
         }
 
-        private void CalculateParameterData(REngine engine)
-        {
-            var parameterRString = from item in columnRStringDictionary
-                                   where parameterList.Contains(item.Key)
-                                   select item;
-            var controlRString = new Dictionary<string, string>();
-            foreach (var col in columnRStringDictionary)
-            {
-                if(controlVarList.Contains(col.Key))
-                    controlRString.Add(col.Key,col.Value);
-            }
-            foreach (var item in parameterRString)
-            {
-                controlRString.Add(item.Key,item.Value);
-                var val = CalculateStatisticData(controlRString, item.Key,engine);
-                Connector.parameterRegressionDictionary.Add(item.Key,val);
-                controlRString.Remove(item.Key);
-            }
-            
-        }
 
         #endregion
 
@@ -564,9 +543,6 @@ namespace cours_work_test6
 
             columnRStringDictionary.Add(keyToRemove, valueToremove);
 
-            if(parameterList.Count>0)
-                CalculateParameterData(engine);
-
             Connector.regressionDictionary = regressionList;
             Connector.MinMaxDictionary = CalculateMinMax(staticVarList.Union(controlVarList).Union(optimVarList));
             engine.Dispose();
@@ -581,6 +557,7 @@ namespace cours_work_test6
             Connector.staticVars = staticVarList;
             Connector.optimVarList = optimVarList;
             Connector.controlVarList = controlVarList;
+            Connector.parameterList = parameterList;
         }
 
         private void ParameterButton_Click(object sender, RoutedEventArgs e)

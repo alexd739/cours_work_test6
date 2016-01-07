@@ -16,12 +16,7 @@ using intlinprogNative;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Text.RegularExpressions;
-using Microsoft.SolverFoundation.Services;
-using MilpManager.Abstraction;
-using MilpManager.Implementation;
-using MsfMilpManager.Implementation;
-using Domain = MilpManager.Abstraction.Domain;
-using intlinprogNative;
+
 
 
 namespace cours_work_test6
