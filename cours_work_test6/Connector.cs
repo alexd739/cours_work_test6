@@ -31,6 +31,8 @@ namespace cours_work_test6
         public static ObservableCollection<object> staticVars = new ObservableCollection<object>();
         public static ObservableCollection<object> controlVarList = new ObservableCollection<object>();
         public static ObservableCollection<object> optimVarList = new ObservableCollection<object>();
-        public static ObservableCollection<object> parameterList = new ObservableCollection<object>(); 
+        public static ObservableCollection<object> parameterList = new ObservableCollection<object>();
+        public static List<List<double>> Aeq = new List<List<double>>();
+        public static List<double> Beq = new List<double>();
     }
 }

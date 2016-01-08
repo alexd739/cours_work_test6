@@ -313,12 +313,13 @@ namespace cours_work_test6
         /// и установка ее в PATH
         /// </summary>
         /// <param name="Rversion"></param>
-        private void ConfigurePath(string Rversion = "R-3.2.3")
+        private void ConfigurePath()
         {
+            var installPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\R-core\R").GetValue("InstallPath").ToString();
             var oldPath = System.Environment.GetEnvironmentVariable("PATH");
             var rPath = System.Environment.Is64BitProcess ?
-                                   string.Format(@"C:\Program Files\R\{0}\bin\x64", Rversion) :
-                                   string.Format(@"C:\Program Files\R\{0}\bin\i386", Rversion);
+                                   string.Format(@"{0}\bin\x64",installPath) :
+                                   string.Format(@"{0}\bin\i386", installPath);
             if (!Directory.Exists(rPath))
                 throw new DirectoryNotFoundException(
                   string.Format(" R.dll not found in : {0}", rPath));
@@ -532,7 +533,12 @@ namespace cours_work_test6
 
             regressionList.Add(optimVarList.ElementAt(0).ToString(), val);
 
-            columnRStringDictionary.Remove(optimVarList.ElementAt(0).ToString());
+            var tempRStringDicitonary = columnRStringDictionary;
+
+            foreach (var param in parameterList.Union(optimVarList))
+            {
+                tempRStringDicitonary.Remove(param.ToString());
+            }
 
             foreach (var column in staticVarList)
             {

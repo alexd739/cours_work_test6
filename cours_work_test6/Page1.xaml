@@ -33,7 +33,6 @@
             <TextBox x:Name="FilePath" HorizontalAlignment="Left" Height="23" Margin="19,492,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382"/>
             <Label x:Name="label4" Content="Путь к файлу с данными:" HorizontalAlignment="Left" Margin="19,466,0,0" VerticalAlignment="Top"/>
             <Button x:Name="FileSeekButton" Content="Обзор" HorizontalAlignment="Left" Margin="406,495,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
-            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="433,538,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="63" Width="309"/>
             <Button x:Name="ChoiseButton" Content="Сделать Выбор" HorizontalAlignment="Left" Margin="1252,295,0,0" VerticalAlignment="Top" Width="125" Height="50" Click="ChoiseButton_Click"/>
             <ListBox x:Name="parameterListBox" HorizontalAlignment="Left" Height="122" Margin="1015,434,0,0" VerticalAlignment="Top" Width="231"/>
             <Label x:Name="label5" Content="Параметры" HorizontalAlignment="Left" Margin="1015,410,0,0" VerticalAlignment="Top"/>

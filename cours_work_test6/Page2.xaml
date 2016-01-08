@@ -21,7 +21,7 @@
                 <RowDefinition Height="74*"/>
                 <RowDefinition Height="215*"/>
             </Grid.RowDefinitions>
-            <ListBox x:Name="DataList" Grid.Column="0" HorizontalAlignment="Left" Height="410" Margin="10,10,0,0" VerticalAlignment="Top" Width="300" Grid.Row="2" SelectionChanged="OutputData_SelectionChanged"/>
+            <ListBox x:Name="DataList" Grid.Column="0" HorizontalAlignment="Left" Height="193" Margin="10,10,0,0" VerticalAlignment="Top" Width="300" Grid.Row="2" SelectionChanged="OutputData_SelectionChanged"/>
             <TextBlock HorizontalAlignment="Center"  TextWrapping="Wrap" Text="Имена переменных: " VerticalAlignment="Center" FontSize="18" Height="24" Margin="74,20" Width="172"/>
             <TextBlock Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Крайние значение переменных: " VerticalAlignment="Center" FontSize="18" Height="24" Margin="24,20" Width="272"/>
             <Grid Grid.Column="1" Grid.Row="1">
@@ -33,24 +33,26 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Min:" VerticalAlignment="Center" FontSize="14" />
-                <TextBlock Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Max:" VerticalAlignment="Center" FontSize="14"/>
-                <Button Click="ClearIntcon"  Content="ClearLeftBox" HorizontalAlignment="Left" Margin="10,36,0,0" Grid.Row="1" VerticalAlignment="Top" Width="140" Height="35"/>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Min:" VerticalAlignment="Center" FontSize="14" RenderTransformOrigin="0.574,6.943" Margin="68,0,68,36" Height="28" />
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Max:" VerticalAlignment="Center" FontSize="14" RenderTransformOrigin="0.421,-0.834" Margin="66,0,64,46"/>
+                <Button Click="ClearIntcon"  Content="Clear box on the down" HorizontalAlignment="Left" Margin="-230,18,0,0" VerticalAlignment="Top" Width="140" Height="35"/>
+                <Button x:Name="SaveMinMax" Content="Сохранить изменения" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" Height="40" Grid.Column="1" Grid.Row="1" Click="ButtonSaveMinMax"/>
+                <Button Content="Изменить ограничения" Click="ButtonChangeMinMax" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" Height="40" Grid.Row="1"/>
+                <TextBox x:Name="Min" HorizontalAlignment="Left" Margin="10,22,0,10" Width="140" Height="32" VerticalAlignment="Center"/>
+                <TextBox x:Name="Max" HorizontalAlignment="Right" Margin="0,21,10,11" VerticalAlignment="Center" Width="140" Height="32" Grid.Column="1"/>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Min:" VerticalAlignment="Center" FontSize="14" RenderTransformOrigin="0.574,6.943" Margin="68,0,68,42" Height="22" />
             </Grid>
-            <TextBox x:Name="Min" HorizontalAlignment="Left" Margin="10,18,0,380" Width="140" Height="32" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
-            <TextBox x:Name="Max" HorizontalAlignment="Right" Margin="0,18,12,380" VerticalAlignment="Center" Width="140" Height="32" Grid.Column="1" Grid.Row="2"/>
-            <Button x:Name="SaveMinMax" Content="Сохранить изменения" HorizontalAlignment="Left" Margin="170,105,0,0" VerticalAlignment="Top" Width="140" Height="40" Grid.Column="1" Grid.Row="2" Click="ButtonSaveMinMax"/>
-            <Button Content="Обновить данные" Grid.Column="1" HorizontalAlignment="Left" Margin="10,338,0,0" Grid.Row="2" VerticalAlignment="Top" Width="140" Height="42" Click="UpdateButton_Click"/>
-            <Button Content="Изменить ограничения" Click="ButtonChangeMinMax" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Width="140" Height="40" Grid.Column="1" Grid.Row="2"/>
-            <Button Content="Отметить целочисленные переменные" Click="ButtonIntDataInput" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top" Height="40" Grid.Column="1" Grid.Row="2" Width="219"/>
+            <Button Content="Обновить данные" Grid.Column="1" HorizontalAlignment="Left" Margin="0,161,0,0" Grid.Row="2" VerticalAlignment="Top" Width="243" Height="42" Click="UpdateButton_Click" RenderTransformOrigin="0.393,-1.81"/>
+            <Button Content="Отметить переменню как целочисленную" Click="ButtonIntDataInput" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="40" Grid.Column="1" Grid.Row="2" Width="243"/>
             <ScrollViewer Name="IndexBox" HorizontalAlignment="Left" Margin="10,103,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="300"/>
-            <Button Click="ButtonAddStatVar" Content="Указать значение стат. переменной" Grid.Column="1" HorizontalAlignment="Left" Margin="10,283,0,0" Grid.Row="2" VerticalAlignment="Top" Height="35"/>
-            <TextBox Name="StatVarBox" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="10,230,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
-            <Button Click="ClearStatVars" Content="Очистить стат. знач." Grid.Column="1" HorizontalAlignment="Left" Margin="170,230,0,0" Grid.Row="2" VerticalAlignment="Top" Width="115" Height="34"/>
+            <ListBox x:Name="ParamaterListBox" HorizontalAlignment="Left" Height="212" Margin="10,208,0,0" Grid.Row="2" VerticalAlignment="Top" Width="300" SelectionChanged="ParamaterListBox_SelectionChanged"/>
+            <TextBox x:Name="ParameterValueTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="10,296,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="SaveParameterValueButton" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="10,325,0,0" Grid.Row="2" VerticalAlignment="Top" Width="120" Height="41" Click="SaveParameterValueButton_Click"/>
         </Grid>
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Оптимальные значения переменных:" VerticalAlignment="Top" FontSize="18"/>
         <ScrollViewer Name="OutputList" Grid.Column="1" HorizontalAlignment="Center" Height="395" VerticalAlignment="Center" Width="396"/>
         <Button Click="RunMatlab" Content="Run!" Grid.Column="1" HorizontalAlignment="Left" Margin="416,558,0,0" VerticalAlignment="Top" Width="125" Height="41"/>
+        <Button  Click="AddLimitParams" Content="Задать ограничения равенства" HorizontalAlignment="Left" Margin="322,296,0,0" VerticalAlignment="Top" Width="241" Height="36"/>
 
     </Grid>
 </Page>
