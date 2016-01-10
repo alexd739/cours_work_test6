@@ -64,6 +64,15 @@ namespace cours_work_test6
             NumVarStat = new List<int>();
             _parameterRegressionValuesDictionary=new Dictionary<string, double>();
             _parameterValuesDictionary= new Dictionary<string, double?>();
+            OutputList.Content = "";
+            DataList.Items.Clear();
+            InsertArrayF();
+            InsertArrayA();
+            InsertArrayB();
+            InsertArraysLBandUB();
+            InsertArrayIntcon();
+            ParamaterListBox.ItemsSource = Connector.parameterList;
+            ParamaterListBox.SelectionMode = SelectionMode.Single;
         }
 
 
@@ -157,32 +166,40 @@ namespace cours_work_test6
         //Не закончено
         private void MatlabWork()
         {
-            MatlabMILP optimisation = new MatlabMILP();
+            try
+            {           
+                MatlabMILP optimisation = new MatlabMILP();
 
-            var Aeq = new double[Connector.Aeq.Count,Connector.Aeq.ElementAt(0).Count];
+                var Aeq = new double[Connector.Aeq.Count,Connector.Aeq.ElementAt(0).Count];
 
-            for (int j = 0; j < Connector.Aeq.Count; j++)
-            {
-                for (int k = 0; k < Connector.Aeq.ElementAt(0).Count; k++)
+                for (int j = 0; j < Connector.Aeq.Count; j++)
                 {
-                    Aeq[j, k] = Connector.Aeq[j].ElementAt(k);
+                    for (int k = 0; k < Connector.Aeq.ElementAt(0).Count; k++)
+                    {
+                        Aeq[j, k] = Connector.Aeq[j].ElementAt(k);
+                    }
                 }
+
+                double[] aq = { 0, 0, 0, 0,0,0,0,0};
+                double[] bq = { 0 };
+                var result = optimisation.intlinprog(2, F, intcon.ToArray(), A, B, Aeq, Connector.Beq.ToArray(), lb, ub);//Beq.ToArray()
+                object[] resob = result;
+                double[,] res1 = (double[,])resob[1];
+                double[,] res2 = (double[,])resob[0];
+                int i = 1;
+
+                foreach (double temp in res2)
+                {
+                    OutputList.Content += Connector.regressionDictionary.ElementAt(0).Value.ElementAt(i++).Key.ToString() + " " + temp.ToString() + Environment.NewLine;
+                }
+                OutputList.Content += "Оптимальное решение: " + Connector.regressionDictionary.ElementAt(0).Key.ToString() + " = " + (res1[0, 0] + const_f).ToString() + Environment.NewLine;
+                OutputList.Content += "Оптимальное решение: " + Connector.regressionDictionary.ElementAt(0).Key.ToString() + " = " + (res1[0, 0]).ToString();
             }
-
-            double[] aq = { 0, 0, 0, 0,0,0,0,0};
-            double[] bq = { 0 };
-            var result = optimisation.intlinprog(2, F, intcon.ToArray(), A, B, Aeq, Connector.Beq.ToArray(), lb, ub);//Beq.ToArray()
-            object[] resob = result;
-            double[,] res1 = (double[,])resob[1];
-            double[,] res2 = (double[,])resob[0];
-            int i = 1;
-
-            foreach (double temp in res2)
+            catch (Exception)
             {
-                OutputList.Content += Connector.regressionDictionary.ElementAt(0).Value.ElementAt(i++).Key.ToString() + " " + temp.ToString() + Environment.NewLine;
+                    
+                throw;
             }
-            OutputList.Content += "Оптимальное решение: " + Connector.regressionDictionary.ElementAt(0).Key.ToString() + " = " + (res1[0, 0] + const_f).ToString() + Environment.NewLine;
-            OutputList.Content += "Оптимальное решение: " + Connector.regressionDictionary.ElementAt(0).Key.ToString() + " = " + (res1[0, 0]).ToString();
         }
 
         #endregion MatlabFunctions
@@ -191,19 +208,7 @@ namespace cours_work_test6
 
         #region Buttons
         //Не закончено
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-            OutputList.Content = "";
-            DataList.Items.Clear();
-            InsertArrayF();
-            InsertArrayA();
-            InsertArrayB();
-            InsertArraysLBandUB();
-            InsertArrayIntcon();
-            ParamaterListBox.ItemsSource = Connector.parameterList;
-            ParamaterListBox.SelectionMode = SelectionMode.Single;
-        }
-
+ 
         private void OutputData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
