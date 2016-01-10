@@ -3,24 +3,23 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-	Title="Page3">
+      mc:Ignorable="d"
+	Title="Page3" Height="345.619" Width="378.093">
 
     <Grid>
-        <ListBox x:Name="ListParams" HorizontalAlignment="Left" Height="184" Margin="10,52,0,0" VerticalAlignment="Top" Width="118" SelectionChanged="ListBox_SelectionChanged"/>
-        <ListBox MouseDoubleClick="ListAeqDoubleClick" x:Name="ListAeq" HorizontalAlignment="Left" Height="147" Margin="133,52,0,0" VerticalAlignment="Top" Width="40" />
+        <ListBox x:Name="ParamsListBox" HorizontalAlignment="Left" Height="184" Margin="10,52,0,0" VerticalAlignment="Top" Width="118" SelectionChanged="ParamsListBox_SelectionChanged"/>
+        <ListBox SelectionChanged="ListAeq_SelectionChanged" x:Name="ListAeq" HorizontalAlignment="Left" Height="184" Margin="133,52,0,0" VerticalAlignment="Top" Width="40" />
         <TextBlock HorizontalAlignment="Left" Margin="24,30,0,0" TextWrapping="Wrap" Text="Переменные" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="133,30,0,0" TextWrapping="Wrap" Text="Aeq" VerticalAlignment="Top" Height="17" Width="40"/>
+        <TextBlock HorizontalAlignment="Left" Margin="177,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="40"><Run Text="Beq"/><LineBreak/><Run/><LineBreak/><Run Text="eq"/></TextBlock>
         <Button Click="SaveLimits" Content="Сохранить все" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="86"/>
-        <Button Click="ClearAllLimits" Content="Очиsтить Aeq" HorizontalAlignment="Left" Margin="101,270,0,0" VerticalAlignment="Top" Width="83"/>
-        <ListBox HorizontalAlignment="Left" Height="119" Margin="190,52,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListBox HorizontalAlignment="Left" Height="36" Margin="190,200,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBlock HorizontalAlignment="Left" Margin="178,30,0,0" TextWrapping="Wrap" Text="Список ограничений:" VerticalAlignment="Top" Width="122" Height="22"/>
-        <TextBox x:Name="TextBoxOneParamFromAeq" HorizontalAlignment="Left" Height="23" Margin="10,241,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="86"/>
-        <Button Click="SaveOneParam" Content="Button" HorizontalAlignment="Left" Margin="101,241,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="ElementBeq" HorizontalAlignment="Left" Height="32" Margin="133,204,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.144,0.127" />
-        <Button Click="ButtonContinue" Content="Далее" HorizontalAlignment="Left" Margin="242,270,0,0" VerticalAlignment="Top" Width="48"/>
+        <Button Click="ClearAllLimits" Content="Очиsтить Aeq" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="83"/>
+        <ListBox HorizontalAlignment="Left" Height="119" Margin="268,52,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListBox HorizontalAlignment="Left" Height="36" Margin="268,270,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBlock HorizontalAlignment="Left" Margin="268,17,0,0" TextWrapping="Wrap" Text="Список ограничений:" VerticalAlignment="Top" Width="100" Height="29"/>
+        <TextBox x:Name="TextBoxOneParamFromAeq" HorizontalAlignment="Left" Height="23" Margin="177,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="86"/>
+        <Button x:Name="SaveElementButton" Click="SaveElementButton_Click" Content="Сохранить" HorizontalAlignment="Left" Margin="133,269,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="ElementBeq" HorizontalAlignment="Left" Height="23" Margin="133,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.144,0.127" />
+        <Button Click="ButtonContinue" Content="Далее" HorizontalAlignment="Left" Margin="133,295,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Page>

@@ -158,29 +158,31 @@ namespace cours_work_test6
         private void MatlabWork()
         {
             MatlabMILP optimisation = new MatlabMILP();
-            try
+
+            var Aeq = new double[Connector.Aeq.Count,Connector.Aeq.ElementAt(0).Count];
+
+            for (int j = 0; j < Connector.Aeq.Count; j++)
             {
-
-                double[] aq = { 0, 0, 0, 0,0,0,0,0};
-                double[] bq = { 0 };
-                var result = optimisation.intlinprog(2, F, intcon.ToArray(), A, B, aq, bq, lb, ub);//Beq.ToArray()
-                object[] resob = result;
-                double[,] res1 = (double[,])resob[1];
-                double[,] res2 = (double[,])resob[0];
-                int i = 1;
-
-                foreach (double temp in res2)
+                for (int k = 0; k < Connector.Aeq.ElementAt(0).Count; k++)
                 {
-                    OutputList.Content += Connector.regressionDictionary.ElementAt(0).Value.ElementAt(i++).Key.ToString() + " " + temp.ToString() + Environment.NewLine;
+                    Aeq[j, k] = Connector.Aeq[j].ElementAt(k);
                 }
-                OutputList.Content += "Оптимальное решение: " + Connector.regressionDictionary.ElementAt(0).Key.ToString() + " = " + (res1[0, 0] + const_f).ToString() + Environment.NewLine;
-                OutputList.Content += "Оптимальное решение: " + Connector.regressionDictionary.ElementAt(0).Key.ToString() + " = " + (res1[0, 0]).ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
 
+            double[] aq = { 0, 0, 0, 0,0,0,0,0};
+            double[] bq = { 0 };
+            var result = optimisation.intlinprog(2, F, intcon.ToArray(), A, B, Aeq, Connector.Beq.ToArray(), lb, ub);//Beq.ToArray()
+            object[] resob = result;
+            double[,] res1 = (double[,])resob[1];
+            double[,] res2 = (double[,])resob[0];
+            int i = 1;
+
+            foreach (double temp in res2)
+            {
+                OutputList.Content += Connector.regressionDictionary.ElementAt(0).Value.ElementAt(i++).Key.ToString() + " " + temp.ToString() + Environment.NewLine;
+            }
+            OutputList.Content += "Оптимальное решение: " + Connector.regressionDictionary.ElementAt(0).Key.ToString() + " = " + (res1[0, 0] + const_f).ToString() + Environment.NewLine;
+            OutputList.Content += "Оптимальное решение: " + Connector.regressionDictionary.ElementAt(0).Key.ToString() + " = " + (res1[0, 0]).ToString();
         }
 
         #endregion MatlabFunctions
